@@ -1,0 +1,334 @@
+/* ===== GLOBAL ===== */
+body {
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  background: linear-gradient(180deg, #f1f4f9, #e9eef5);
+  margin: 0;
+  color: #1f2937;
+}
+
+/* ===== HEADER ===== */
+h1 {
+  text-align: center;
+  padding: 14px;
+  margin: 0;
+  width: 128.2%;
+  box-sizing: border-box;
+  font-size: 29px;
+  letter-spacing: 0.5px;
+  background: linear-gradient(10000deg, #0b4c8d, #102d4b);
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+/* ===== TOOLBAR ===== */
+.toolbar {
+  display: flex;
+  gap: 30px;
+  padding: 12px 14px;
+  background: #ffffff;
+  align-items: center;
+  border-bottom: 1px solid #dbe3ee;
+  width: 128.2%;
+  box-sizing: border-box;
+}
+
+input, select {
+  padding: 8px;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  font-size: 14px;
+  background: #f8fafc;
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: #092667;
+  background: #ffffff;
+  box-shadow: 0 0 0 2px rgba(37,99,235,0.15);
+}
+
+button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  background: linear-gradient(90deg, #4c5567, #102d4b);
+  color: white;
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  background: linear-gradient(90deg, #636776, #102d4b);
+  transform: translateY(-1px);
+}
+
+/* ===== TABLE ===== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+th {
+  background: linear-gradient(180deg, #0b4c8d, #102d4b);
+  color: #ffffff;
+  padding: 10px;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  border-bottom: 2px solid #173b62;
+}
+/* make header position relative so delete button can be positioned */
+th.col-header { position: relative; }
+
+.col-title { display: inline-block; padding-right: 18px; }
+
+/* delete icon hidden by default, shown when hovering the header */
+.col-delete {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: rgba(255,255,255,0.9);
+  font-size: 12px;
+  padding: 4px 6px;
+  border-radius: 4px;
+  opacity: 0;
+  transition: opacity 0.12s ease, background 0.12s ease;
+  cursor: pointer;
+}
+
+th.col-header:hover .col-delete { opacity: 1; background: rgba(255,255,255,0.08); }
+
+/* slightly larger hit area on hover for accessibility */
+.col-delete:hover { background: rgba(255,255,255,0.14); }
+
+td {
+  padding: 10px;
+  border: 1px solid #e2e8f0;
+  font-size: 14px;
+}
+
+/* ===== GROUP / INSTITUTE ROW ===== */
+tr.group-start {
+  background: linear-gradient(90deg, #eef4ff, #f5f9ff);
+  font-weight: 600;
+  color: #16416c;
+}
+
+/* ===== ROW HOVER ===== */
+tr:hover {
+  background: #edf4ff;
+  cursor: pointer;
+}
+
+/* ===== ACTION CELL ===== */
+.action-cell {
+  white-space: nowrap;
+  position: relative;
+}
+
+/* EDIT BUTTON */
+.edit-btn {
+  margin-right: 8px;
+}
+
+/* PLUS BUTTON (hidden by default) */
+.plus-btn {
+  opacity: 0;
+  padding: 0 6px;
+  font-size: 18px;
+  background: transparent;
+  border-radius: 0;
+  border: none;
+  color: #6b7280;
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+
+/* Show ➕ only when row is hovered */
+tr:hover .plus-btn {
+  opacity:1;
+  transform: scale(1);
+}
+
+/* Hover effect */
+.plus-btn:hover {
+  color: #7c3aed;
+  transform: translateY(-1px);
+}
+
+/* ===== MODAL OVERLAY ===== */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(3px);
+}
+
+/* ===== MODAL BOX ===== */
+.modal-content {
+  background: #ffffff;
+  width: 820px;
+  margin: 1vh auto;
+  padding: 5px 24px;
+  border-radius: 30px;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+  animation: fadeIn 0.25s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    transform: translateY(-15px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ===== EDIT FORM ===== */
+#editForm {
+  display: block;
+  margin-top: 8px;
+  padding-bottom: 8px;
+}
+
+#editForm label {
+  font-size: 15px;
+  font-weight: 600;
+  color: #374151;
+}
+
+#editForm input {
+  width: 100%;
+  padding: 10px 20px;
+  border-radius: 6px;
+  border: 1px solid #2a6dc5;
+  background: #fafdff;
+  margin-bottom: 14px;
+  box-sizing: border-box;
+}
+
+/* Row block: each S.No row is a section with header and stacked fields */
+.row-block {
+  border-bottom: 2px solid #66686c;
+  padding: 14px 6px 20px 6px;
+  margin-bottom: 12px;
+}
+
+.row-block h4 {
+  margin: 0 0 12px 0;
+  font-size: 23px;
+  color: #0f172a;
+}
+
+/* Labels sit above inputs for a clean single-column layout */
+#editForm label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 16px;
+  color: #374151;
+}
+
+/* Top row tabs */
+.row-tabs {
+  display: flex;
+  gap: 8px;
+  margin: 12px 0 6px 0;
+  flex-wrap: wrap;
+}
+
+.row-tab {
+  background: #09325c;
+  border: 1px solid #436fa9;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.row-tab:hover { background: #3156d0; }
+
+.row-block.active-row { outline: 2px solid rgba(59,130,246,0.15); box-shadow: 0 4px 18px rgba(59,130,246,0.06); }
+
+/* actions shown per row */
+.row-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 6px;
+}
+
+.row-actions button {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.row-actions button:first-child { background: linear-gradient(90deg,#045339,#064d36); color: #fff; }
+.row-actions button:last-child { background: linear-gradient(90deg,#790e0e,#611010); color: #fff; }
+
+/* Modal overlay centered and modal constrained */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(3px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px;
+}
+
+.modal-content {
+  background: #ffffff;
+  width: min(1000px, 96%);
+  max-width: 1000px;
+  padding: 20px 28px;
+  border-radius: 14px;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 80px);
+  overflow: hidden;
+}
+
+/* Make the form scroll internally when many fields are present */
+.modal-body {
+  overflow: auto;
+  padding-right: 6px;
+  max-height: calc(100vh - 220px);
+}
+
+/* ===== MODAL ACTIONS ===== */
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.modal-actions button:first-child {
+  background: linear-gradient(90deg, #0e4a24, #074c20);
+}
+
+.modal-actions button:first-child:hover {
+  background: linear-gradient(90deg, #075323, #0c4f26);
+}
+
+.modal-actions button:last-child {
+  background: linear-gradient(90deg, #550909, #b91c1c);
+}
+
+.modal-actions button:last-child:hover {
+  background: linear-gradient(90deg, #570909, #991b1b);
+}
+

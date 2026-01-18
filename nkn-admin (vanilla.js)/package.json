@@ -1,0 +1,16 @@
+{
+  "name": "nkn-contact-admin",
+  "version": "1.0.0",
+  "description": "NKN Contact Directory - XML Editor with persistence",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": ["nkn", "contacts", "xml"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

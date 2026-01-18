@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NKN Contact Directory – NIC</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<h1>NKN Contact Directory – NIC</h1>
+
+<div class="toolbar">
+  <input type="text" id="search" placeholder="Search Institute / Name / Email">
+
+  <span id="roleBadge"></span>
+
+  <button id="addBtn">+ Add</button>
+  <button id="saveBtn">💾 Save XML</button>
+  <button id="exportBtn">📥 Export Excel</button>
+
+  <input id="newColName" placeholder="New Column Name">
+  <button id="addColBtn">Add Column</button>
+</div>
+
+<table id="contactTable">
+  <thead>
+    <tr id="tableHead"></tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+<!-- MODAL -->
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <h3>Edit Contact</h3>
+
+      <select id="insertPosition">
+        <option value="bottom">Add at Bottom</option>
+        <option value="top">Add at Top</option>
+        <option value="after">Add After Selected</option>
+      </select>
+
+      <div id="rowTabs" class="row-tabs"></div>
+
+      <div class="modal-body">
+        <form id="editForm"></form>
+      </div>
+
+    <div class="modal-actions">
+      <button onclick="saveEdit()">Save</button>
+      <button onclick="deleteRow()">Delete</button>
+      <button onclick="closeModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
